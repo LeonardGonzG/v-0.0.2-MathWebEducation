@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{!! asset('/css/main.css') !!}" >
+    <link rel="shortcut icon" type="image/x-icon" href="{!! asset('/img/logo.ico') !!}" />
     <title>MathWeb Education</title>
 </head>
 
@@ -20,8 +21,10 @@
 
         <div class="ui secondary  menu">
 
-            <div class="item">
-                <img class="ui small image" src="./img/mathweb.PNG">
+            <div class="item" >
+                <a href="{{ url('/') }}">
+                <img  class="ui small image" src="{!! asset('/img/mathweb.PNG') !!}">
+                </a>
             </div>
 
             <div class="menu">
@@ -34,14 +37,6 @@
             </div>
             <div class="right menu">
 
-                <div class="ui primary dropdown item">
-                    <i class="user circle icon"></i> Usuarios <i class="icon dropdown"></i>
-                    <div class="menu">
-                        <a class="item"><i class="child icon"></i> Estudiante</a>
-                        <a class="item"><i class="id card icon"></i> Tutores</a>
-                        <a class="item"><i class="user icon"></i> Profesores</a>
-                    </div>
-                </div>
 
                 <a class="item blue">
                     <i class="graduation cap icon"></i> Cursos
@@ -56,12 +51,44 @@
                     <i class="book icon"></i> Biblioteca
                 </a>
 
-/////
-            
+                @guest
+
+                    <a class="item" href="{{ route('login') }}" >{{ __('Ingresar') }}</a>
+
+                    @if (Route::has('register'))
+                    <div class="item">
+                        <div class="ui green button">
+                            <a  id="register" href="{{ route('register') }}">Registrar</a>
+                            <i class="user plus icon"></i>    
+                        </div>
+                    </div>
+                    @endif
+
+                @else
+                <div class="ui primary dropdown item">
+                     <i class="blue book child icon"></i>  {{ Auth::user()->name }} <i class="icon dropdown"></i>
+                    <div class="menu">
+                        <a class="item" href="{{ route('logout') }}" 
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="window close icon"></i> 
+                        {{ __('Salir') }}
+                        
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                        </form>
+                        
+                    </div>
+                </div>
+                @endguest
 
             </div>
 
         </div>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
 
       
 

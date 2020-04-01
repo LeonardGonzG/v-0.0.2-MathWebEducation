@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+
+<div class="ui yellow segment">
+    <p>Envia un correo a <a >mathweb.education@gmail.com</a> para solicitud de restauranción de contraseña</p>
+  </div>
+<!--  <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
@@ -42,6 +46,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
+   
 </div>
 @endsection

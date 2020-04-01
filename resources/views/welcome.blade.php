@@ -9,6 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{!! asset('/css/main.css') !!}" >
+
+    <link rel="shortcut icon" type="image/x-icon" href="{!! asset('/img/logo.ico') !!}" />
     <title>MathWeb Education</title>
 </head>
 
@@ -56,16 +58,31 @@
                     <i class="book icon"></i> Biblioteca
                 </a>
 
-              
-                <div class="item">
-                    <div class="ui green button">
-                    @if (Route::has('register'))
-                            <a  id="register" href="{{ route('register') }}">Register</a>
-                    @endif                    
-                        <i class="user plus icon"></i>
+                @if (Route::has('login'))
+
+                     @auth
+
+                    <div class="item">
+                        <button class="circular ui icon button">
+                            <a href="{{ url('/home') }}">
+                            <i class=" circular inverted blue icon home"></i>
+                            </a> 
+                        </button>
                     </div>
-                </div>
-            
+                     
+                    @else
+
+                        @if (Route::has('register'))
+                        <div class="item">
+                            <div class="ui green button">
+                                    <a  id="register" href="{{ route('register') }}">Registrarse&nbsp;</a>
+                                    <i class="user plus icon"></i>   
+                            </div>
+                        </div>
+                        @endif   
+                    @endauth
+
+                 @endif    
 
             </div>
 
@@ -84,58 +101,89 @@
                         </a>
                     </div>
 
-                    <div class="four wide column ">
+                   
 
-                        <h1>Ingresa a MathWeb Education</h1>
+                    @if (Route::has('login'))
 
-                        <form class="ui form" method="POST" action="{{ route('login') }}" >
-                             @csrf
-                            <div class="field">
-                                <label for="email">Email</label>
-                                <input id="email" type="email" name="email" placeholder="Ingresa email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        @auth
+                        <div class="five wide column ">
+                            <div class="ui green message">
+                            <div class="header">
+                                Bienvenido!!
+                            </div>
+                            <p>Gracias por hacer parte de nuestra comunidad</p>
+                            </div>
+
+                            <div class="ui card">
+                          
+                                <img  class="ui medium image" src="https://avatars.dicebear.com/v2/human/{{ Auth::user()->name }}.svg">
                            
-                                @error('email')
-
-                                <div class="ui negative message">
-                                         <i class="close icon"></i>
-                                           <div class="header">
-                                                 {{ $message }}
-                                            </div>
-                                            <p>
-                                            </p>
+                            <div class="content">
+                                <a class="header" href="#">{{ Auth::user()->name }}</a>
+                                <div class="meta">
+                                <a>{{ Auth::user()->email }}</a>
                                 </div>
-                                @enderror
-                           
                             </div>
-                            <div class="field">
-                                <label for="password">Contraseña</label>
-                                <input id="password" type="password" name="password" placeholder="Contraseña" required autocomplete="current-password">
+                            </div>
+
+
+                        </div>
+
+                        @else
+                         <div class="four wide column ">
+                            <h1>Ingresa a MathWeb Education</h1>
+
+                            <form class="ui form" method="POST" action="{{ route('login') }}" >
+                                @csrf
+                                <div class="field">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="email" name="email" placeholder="Ingresa email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             
-                                @error('password')
-                                <div class="ui negative message">
-                                         <i class="close icon"></i>
-                                           <div class="header">
-                                                 {{ $message }}
-                                            </div>
-                                            <p>
-                                            </p>
+                                    @error('email')
+
+                                    <div class="ui negative message">
+                                            <i class="close icon"></i>
+                                            <div class="header">
+                                                    {{ $message }}
+                                                </div>
+                                                <p>
+                                                </p>
+                                    </div>
+                                    @enderror
+                            
                                 </div>
+                                <div class="field">
+                                    <label for="password">Contraseña</label>
+                                    <input id="password" type="password" name="password" placeholder="Contraseña" required autocomplete="current-password">
+                                
+                                    @error('password')
+                                    <div class="ui negative message">
+                                            <i class="close icon"></i>
+                                            <div class="header">
+                                                    {{ $message }}
+                                                </div>
+                                                <p>
+                                                </p>
+                                    </div>
 
-                                @enderror
-                            
-                            </div>
-                            <div class="field">
-                            @if (Route::has('password.request'))    
-                                Haz olvidado la Contraseña??
-                                <a href="{{ route('password.request') }}">Reestablecer</a>
+                                    @enderror
+                                
+                                </div>
+                                <div class="field">
+                                @if (Route::has('password.request'))    
+                                    Haz olvidado la Contraseña??
+                                    <a href="{{ route('password.request') }}">Reestablecer</a>
 
-                            @endif    
-                            </div>
-                            <button class="ui primary button" type="submit">Submit</button>
-                        </form>
+                                @endif    
+                                </div>
+                                <button class="ui primary button" type="submit">Ingresar</button>
+                            </form>
+                        </div>
+                        @endauth
 
+                    @endif  
 
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -196,6 +244,14 @@
     <script>
         $(document).ready(function() {
             $('.ui.dropdown').dropdown();
+        });
+
+        $('.message .close')
+            .on('click', function() {
+                $(this)
+                .closest('.message')
+                .transition('fade')
+                ;
         });
     </script>
 </body>
