@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" type="text/css" href="{!! asset('/css/main.css') !!}" >
     <link rel="shortcut icon" type="image/x-icon" href="{!! asset('/img/logo.ico') !!}" />
+    
     <title>MathWeb Education</title>
 </head>
 
@@ -38,6 +39,19 @@
             <div class="right menu">
 
 
+                    <a href="{{ route('chat') }}">
+
+                                <div  class="ui labeled button item" tabindex="0">
+                                                    <div class="ui button"   style="color:blue">
+                                                        <i class="wechat icon"></i> Chat
+                                                    </div>
+                                                    <a class="ui basic blue left pointing label">
+                                                        +1
+                                                    </a>  
+                                </div>
+
+                    </a>
+               
                 <a class="item blue">
                     <i class="graduation cap icon"></i> Cursos
                 </a>
