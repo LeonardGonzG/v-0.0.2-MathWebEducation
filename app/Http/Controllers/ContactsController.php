@@ -17,7 +17,7 @@ class ContactsController extends Controller
 
     public function index()
     {
-        return view('chat.chat');
+        return view('chat.exampleChat');
     }
 
     public function get()

@@ -9,12 +9,11 @@
 
     <title>Chat-MathWebEdu</title>
 
-   
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="{!! asset('/img/logo.ico') !!}" />
-    
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

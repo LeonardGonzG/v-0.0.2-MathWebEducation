@@ -1,6 +1,10 @@
 <template>
     <div class="conversation">
-        <h1>{{ contact ? contact.name : 'Select a Contact' }}</h1>
+        <h3 class="infoChat">
+        <img class="user" src="/img/perfil.png">
+        <p class="companero"> {{ contact ? contact.name : 'Seleccione compañero' }}</p>
+
+        </h3>
         <MessagesFeed :contact="contact" :messages="messages"/>
         <MessageComposer @send="sendMessage"/>
     </div>
@@ -46,11 +50,26 @@
     flex-direction: column;
     justify-content: space-between;
 
-    h1 {
-        font-size: 20px;
-        padding: 10px;
-        margin: 0;
-        border-bottom: 1px dashed lightgray;
+    h3.infoChat {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        background: #f5f5f5;
+
+        
+        p.companero{
+            float: left;
+        }
+
+        img.user{
+            width: 40px;
+            border-radius: 50%;
+            float: left;
+            margin: 9px 12px 0 9px;
+        }
+
     }
+    
+
 }
 </style>
